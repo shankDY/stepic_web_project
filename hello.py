@@ -1,6 +1,6 @@
 def app(environ, start_response):
     """парсим часть url, которая поступает после ?. например /?value=a=1&b=3, получаем список"""
-    data = [bytes(i) for i in environ['QUERY_STRING'].split('&')]
+    data = [bytes('\n'.join(environ['QUERY_STRING'].split('&')), encoding='utf8')]
     #статус код
     status = '200 OK'
     #заголовок ответа
