@@ -1,11 +1,11 @@
 from django.urls import path
-import views
+from qa.views import test
 urlpatterns = [
-    path(r'^$',views.test,name='index'),
-    path(r'^login/$',views.test,name='login'),
-    path(r'^signup/$',views.test,name='signup'),
-    path(r'^question/<\d+>/$',views.test,name='question'),
-    path(r'^ask/',views.test,name='ask'),
-    path(r'^popular/$',views.test,name='popular'),
-    path(r'^new/$',views.test,name='new'),
+    path('',test, name='index'),
+    path('login/', test, name='login'),
+    path('signup/', test,name='signup'),
+    path('question/<int:question_id>/', test, name='question'),
+    path('ask/', test, name='ask'),
+    path('popular/', test,name='popular'),
+    path('new/', test, name='new'),
 ]
