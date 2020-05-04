@@ -36,7 +36,7 @@ class Question(models.Model):
     
     #возвращение пути модели
     def get_url(self):
-        return f"/question/{self.pk}"
+        return "/question/{}/".format(self.pk)
 
 
 # модель для ответа
@@ -45,7 +45,7 @@ class Answer(models.Model):
     #дата добавления ответа
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.text
