@@ -14,7 +14,8 @@ sudo ln -s /usr/bin/python3.5 /usr/bin/python3
 sudo pip3 install --upgrade pip
 sudo pip3 install --upgrade django==2.1
 sudo pip3 install --upgrade gunicorn
-sudo apt install libmysqlclient-dev
+sudo apt-get install libssl-dev
+sudo apt-get install libmysqlclient-dev
 sudo pip3 install mysqlclient
 
 # db
