@@ -20,8 +20,6 @@ sudo pip3 install mysqlclient
 # db
 sudo /etc/init.d/mysql start
 mysql -uroot -e "CREATE DATABASE djtest;"
-mysql -uroot -e "CREATE USER 'dj@localhost' IDENTIFIED BY 'rR*Bhj431';"
-mysql -uroot -e "GRANT ALL ON djtest.* TO 'dj@localhost';"
 mysql -uroot -e "FLUSH PRIVILEGES;"
 
 #create migration
