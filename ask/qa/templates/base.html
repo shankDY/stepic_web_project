@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}My ASK{% endblock %}</title>
+</head>
+<body>
+  <header>
+    <h2 class="slogan">Have a question? Ask me.</h2>
+  </header>
+  <div class="wrapper">
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+    <div class="sidebar">
+      {% block sidebar %}
+        <h2>Navigation</h2>
+        <p><a href="/">Home</a></p>
+        <p><a href="/popular/">Popular Questions</a></p>
+        <p><a href="/ask/">Ask Question</a></p>
+        <p><a href="/login/">Log In</a></p>
+        <p><a href="/signup/">Sign Up</a></p>
+        <p><a href="/logout/">Log Out</a></p>
+      {% endblock %}
+    </div>
+  </div>
+  <div class="clear"></div>
+  <footer>
+    <p class="adm"><a href="/admin/">Admin</a></p>
+    <p class="copy">
+      Copyleft 2020. Powered by Django
+    </p>
+  </footer>
+</body>
+</html>

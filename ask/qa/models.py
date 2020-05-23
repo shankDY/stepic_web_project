@@ -4,23 +4,21 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-#custom Query_manager
+#custom Model_manager
 class QuestionManager(models.Manager):
+    #sorted by question time add
     def new(self):
         return self.order_by("-added_at")
-
+    #sorted by rating
     def popular(self):
         return self.order_by("-rating")
 
 # model for question
 class Question(models.Model):
-    #default query_manager
-    questions = models.Manager()
-    # custom query_manager
+    # custom Model_manager
     objects = QuestionManager()
-
     title = models.CharField(max_length=60)
-    text = models.CharField(max_length=255)
+    text = models.TextField()
     #date ad question
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
@@ -31,12 +29,13 @@ class Question(models.Model):
         return self.title
     
     def get_url(self):
+        # return f"/question/{self.pk}/"
         return "/question/{}/".format(self.pk)
 
 
 # model for answer
 class Answer(models.Model):
-    text = models.CharField(max_length=60)
+    text = models.TextField()
     #date ad answer
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
