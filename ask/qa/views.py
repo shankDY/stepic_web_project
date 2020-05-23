@@ -14,7 +14,7 @@ def test(request, *args, **kwargs):
 def paginate(request, qs):
     """create pageination"""
     try:
-        page_number = int(request.GET.get('page'))
+        page_number = int(request.GET.get('page',1))
     except ValueError:
         raise Http404
     paginator = Paginator(qs, 10)

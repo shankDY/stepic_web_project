@@ -3,9 +3,9 @@
 {% block title %} {{ block.super }} {% endblock %}
 
 {% block content %}
-   {% block question_title %} <h1>New Questions</h1>{% endblock %}
+   {% block question_title %} <h1> {{ title }} </h1>{% endblock %}
    {% for question in questions %}
-      <h2><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></h2>
+      <h2><a href="{{ question.get_url }}">{{ question.title }}</a></h2>
   {% endfor %}
 
   {% include "pagination.html" %}

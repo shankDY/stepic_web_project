@@ -24,7 +24,6 @@ mysql -uroot -e "CREATE DATABASE djtest;"
 mysql -uroot -e "FLUSH PRIVILEGES;"
 
 #create migration
-cd web
 cd ask
 python3 manage.py makemigrations qa
 python3 manage.py migrate

@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}{{ question.title }}{% endblock %}
+{% block title %}{{ questions.title }}{% endblock %}
 
 {% block content %}
-  <h1>{{ question.title }}</h1>
-  <p class="submitted">
-    Published {{ question.added_at }} by {{ question.author }}
-  </p>
-  {{ question.text|linebreaks }}
+  <h1>{{ questions.title }}</h1>
+    Published {{ questions.added_at }} by {{ questions.author }}
+  {{ question.text }}
 
   {% block answers %}
     <h2>Answers:</h2>
