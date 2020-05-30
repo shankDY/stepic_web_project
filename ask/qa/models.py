@@ -22,24 +22,25 @@ class Question(models.Model):
     #date ad question
     added_at = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     likes = models.ManyToManyField(User, related_name="question_like_user")
 
     def __str__(self):
         return self.title
     
+    #urls_path
     def get_url(self):
-        # return f"/question/{self.pk}/"
-        return "/question/{}/".format(self.pk)
+        return f"/question/{self.pk}/"
 
 
 # model for answer
 class Answer(models.Model):
+    objects = models.Manager()
     text = models.TextField()
     #date ad answer
     added_at = models.DateTimeField(auto_now_add=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.text

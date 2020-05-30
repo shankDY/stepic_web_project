@@ -1,12 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404
+from django.views.decorators.http import require_GET
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 from qa.models import Question, Answer
-
+from qa.forms import AskForm, AnswerForm
 
 # Create your views here.
+
 def test(request, *args, **kwargs):
     return HttpResponse('OK')
 
@@ -25,7 +28,7 @@ def paginate(request, qs):
         page_content = paginator.get_page(paginator.num_pages)
     return paginator, page_content
 
-
+@require_GET
 def index(request):
     """Home page
     The last question asked is the first on the list.
@@ -41,7 +44,8 @@ def index(request):
                   'page': page,
                   'questions': page.object_list,})
     
-    
+
+@require_GET   
 def popular_question(request):
     """list of "popular" questions.
     Sorting in decreasing order by field rating
@@ -57,17 +61,41 @@ def popular_question(request):
                    'questions': page.object_list,})
 
 
+
 def question_detail(request, question_id):
     """One question page. 
     This page displays the title, text of the question 
     and all the answers to this question.
     
     """
-    try:
-        question = Question.objects.get(pk=question_id)
-    except ObjectDoesNotExist:
-        raise Http404
-    answer = question.answer_set.all()
+    question = get_object_or_404(Question, pk=question_id)
+    answers = question.answer_set.all()
+    form = AnswerForm(request.POST)
+
+    if request.method == 'POST' and form.is_valid():
+        answers = form.save()
+        url = question.get_url()
+        return HttpResponseRedirect(url)
+    else:
+        form = AnswerForm(initial={'question': question_id})
+
     return render(request, 'question_detail.html',
                   {'questions': question,
-                   'answers': answer,})
+                   'answers': answers,
+                   'form': form,})
+
+
+
+def ask(request):
+    """With a GET request - the AskForm form is displayed, 
+    with a POST request the form should create a new question and redirect to the question page
+
+    """
+    form = AskForm(request.POST)
+    if request.method == 'POST' and form.is_valid():
+        question = form.save()
+        url = question.get_url()
+        return HttpResponseRedirect(url)
+    else:
+        form = AskForm()
+    return render(request, 'ask.html', { 'form': form, })

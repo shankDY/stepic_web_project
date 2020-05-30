@@ -69,4 +69,4 @@ class TestInitData(TestCase):
         question, _ = Question.objects.get_or_create(pk=3141592, title='question about pi', text='what is that', author=user)
         question.answer_set.all().delete()                                      
         for i in range(10):                                                     
-            answer = Answer.objects.create(text='answer ' + str(i), question=question, author=user)
+            _ = Answer.objects.create(text='answer ' + str(i), question=question, author=user)
