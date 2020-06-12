@@ -30,7 +30,7 @@ class Question(models.Model):
     
     #urls_path
     def get_url(self):
-        return f"/question/{self.pk}/"
+        return "/question/{}".format(self.pk)
 
 
 # model for answer

@@ -5,7 +5,8 @@
 {% block content %}
   <h1>{{ questions.title }}</h1>
     Published {{ questions.added_at }} by {{ questions.author }}
-  {{ question.text }}
+    <h2>Text:</h2> 
+    {{ questions.text }}
 
   {% block answers %}
     <h2>Answers:</h2>
@@ -14,7 +15,7 @@
         <p class="info">
           Answer by {{ answer.author }} [{{ answer.added_at }}]
         </p>
-        {{ answer.text|linebreaks }}
+        {{ answer.text }}
       </div>
       {% empty %}
       <p>There are no answers yet.</p>
